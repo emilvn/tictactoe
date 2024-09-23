@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #0f172a;
+        color: white;
+      }
+      #board {
+        display: grid;
+        width: 400px;
+        height: 400px;
+        border: 1px solid white;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .cell {
+        border: 1px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+        background-color: #1c2947;
+        cursor: default;
+        user-select: none;
+      }
+      .cell:empty:hover,
+      #restart:hover {
+        cursor: pointer;
+        background-color: #2c3d64;
+      }
+      #restart {
+        border: 1px solid white;
+        background-color: #1c2947;
+        margin-top: 10px;
+        border-radius: 5px;
+        padding: 5px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>
+      Tic Tac Toe ⭕❌
+      <button id="restart">Restart</button>
+    </h2>
+    <div id="board"></div>
+  </body>
+  <script src="controller.js" type="module"></script>
+</html>
