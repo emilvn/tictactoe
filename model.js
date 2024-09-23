@@ -60,9 +60,9 @@ export class Grid {
     // diagonal
     const diagonal1 = [];
     const diagonal2 = [];
-    for (let i = 0; i < rows; i++) {
-      diagonal1.push([i, i]);
-      diagonal2.push([i, cols - 1 - i]);
+    for (let i = 0, j = cols - 1; i < rows && j >= 0; i++, j--) {
+      diagonal1.push([i, i]); // diagonal top left to bottom right is always i, i
+      diagonal2.push([i, j]);
     }
     combinations.push(diagonal1);
     combinations.push(diagonal2);
