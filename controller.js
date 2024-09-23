@@ -3,8 +3,9 @@ import * as view from "./view.js";
 
 window.addEventListener("load", init);
 
-const ROW_NUM = 7;
-const COL_NUM = 7;
+// works with all sizes, but columns and rows must be equal
+const ROW_NUM = 3;
+const COL_NUM = ROW_NUM;
 let isXturn = true;
 let grid;
 
@@ -18,7 +19,10 @@ export function setCell(e, i) {
   grid.writeToIndex(isXturn, i);
   view.setCellContent(e.target, isXturn);
   isXturn = !isXturn;
-  grid.dump();
+  const winner = grid.getWinner();
+  if (winner !== undefined) {
+    view.showWinnerDialog(winner);
+  }
 }
 
 export function handleClear() {

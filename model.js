@@ -12,6 +12,7 @@ export class Grid {
   }
 
   getCellContent(row, col) {
+    if (this.grid[row] === undefined) return;
     return this.grid[row][col];
   }
 
@@ -36,9 +37,59 @@ export class Grid {
     return [row, col];
   }
 
-  //TODO: make method to get winning combinations.
-  // the 2 diagonals, and one for each row and one for each col.
+  getWinningCombinations() {
+    const combinations = [];
+    const rows = this.rowNum;
+    const cols = this.colNum;
+    // rows
+    for (let r = 0; r < rows; r++) {
+      const row = [];
+      for (let c = 0; c < cols; c++) {
+        row.push([r, c]);
+      }
+      combinations.push(row);
+    }
+    // cols
+    for (let c = 0; c < cols; c++) {
+      const col = [];
+      for (let r = 0; r < rows; r++) {
+        col.push([r, c]);
+      }
+      combinations.push(col);
+    }
+    // diagonal
+    const diagonal1 = [];
+    const diagonal2 = [];
+    for (let i = 0; i < rows; i++) {
+      diagonal1.push([i, i]);
+      diagonal2.push([i, cols - 1 - i]);
+    }
+    combinations.push(diagonal1);
+    combinations.push(diagonal2);
+    return combinations;
+  }
 
+  getWinner() {
+    const winningCombinations = this.getWinningCombinations();
+    for (const combination of winningCombinations) {
+      const firstElement = this.getCellContent(
+        combination[0][0],
+        combination[0][1]
+      );
+      if (firstElement === undefined) continue;
+      let isWinning = true;
+      for (let i = 1; i < combination.length; i++) {
+        const [row, col] = combination[i];
+        const element = this.getCellContent(row, col);
+        if (element !== firstElement) {
+          isWinning = false;
+          break;
+        }
+      }
+      if (isWinning) return firstElement;
+    }
+    return undefined;
+  }
   clear() {
     this.grid = [];
     for (let i = 0; i < this.rowNum; i++) {

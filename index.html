@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      :root {
+        --ROW_COUNT: 3;
+      }
       body {
         font-family: monospace;
         display: flex;
@@ -16,6 +19,8 @@
       }
       #board {
         display: grid;
+        grid-template-columns: repeat(var(--ROW_COUNT), 1fr);
+        grid-template-rows: repeat(var(--ROW_COUNT), 1fr);
         width: 400px;
         height: 400px;
         border: 1px solid white;
@@ -33,17 +38,31 @@
         user-select: none;
       }
       .cell:empty:hover,
-      #restart:hover {
+      #restart:hover,
+      #close:hover {
         cursor: pointer;
         background-color: #2c3d64;
       }
-      #restart {
+      #restart,
+      #close {
         border: 1px solid white;
         background-color: #1c2947;
         margin-top: 10px;
         border-radius: 5px;
         padding: 5px;
         color: white;
+      }
+      #show-winner[open] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #0f172a;
+        color: white;
+        width: 300px;
+      }
+      #winner {
+        font-size: 3em;
       }
     </style>
   </head>
@@ -53,6 +72,11 @@
       <button id="restart">Restart</button>
     </h2>
     <div id="board"></div>
+    <dialog id="show-winner">
+      <h2>Winner:</h2>
+      <div id="winner"></div>
+      <button id="close">Restart</button>
+    </dialog>
   </body>
   <script src="controller.js" type="module"></script>
 </html>
